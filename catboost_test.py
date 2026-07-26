@@ -1,9 +1,7 @@
 import pandas as pd
 from catboost import CatBoostRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold, cross_val_score
-
-
+from sklearn.model_selection import KFold, StratifiedKFold, cross_val_score
 
 df = pd.read_csv("car_listings_cleaned.csv")
 X = df.drop("car_price", axis=1)
@@ -30,6 +28,9 @@ model = CatBoostRegressor(
     cat_features=cat_features
 )
 
+y_binned = pd.qcut(y_train, q=10, labels=False)
+skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+
 kf_validation = KFold(n_splits=3, shuffle=True, random_state=42)
 
 scores = cross_val_score(
@@ -37,7 +38,7 @@ scores = cross_val_score(
     X_train,
     y_train,
     scoring="neg_root_mean_squared_error",
-    cv=kf_validation
+    cv=skf_validation.split(X_train, y_binned)
 ) 
 
 print(scores)
