@@ -39,7 +39,7 @@ pipeline = Pipeline([
     ("preprocessor", encoder),
     ("model", model)
 ])
-"""
+
 y_binned = pd.qcut(y_train, q=10, labels=False)
 skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
 
@@ -52,9 +52,4 @@ scores = cross_val_score(
 ) 
 
 print(scores)
-"""
-pipeline.fit(X_train, y_train)
 
-xgb = pipeline.named_steps["model"]
-print(xgb.feature_importances_)
-print(xgb.feature_names)
