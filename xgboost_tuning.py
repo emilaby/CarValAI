@@ -1,16 +1,17 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import TargetEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import StratifiedKFold, cross_val_score
+from sklearn.model_selection import StratifiedKFold, RandomizedSearchCV
 from xgboost import XGBRegressor
 
 
 df = pd.read_csv("car_listings_cleaned.csv")
 X = df.drop("car_price", axis=1)
-y = df["car_price"]
+y = np.log1p(df["car_price"])
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
@@ -25,31 +26,46 @@ encoder = ColumnTransformer(
 )
 
 model = XGBRegressor(
-    n_estimators=1000,
-    learning_rate=0.05,
-    subsample=0.8,
-    colsample_bytree=0.8,
     objective="reg:squarederror",
     random_state=42,
-    n_jobs=-1,
-    verbosity=2
+    n_jobs=-1
 )
+
+y_binned = pd.qcut(np.expm1(y_train), q=10, labels=False)
+skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+
+param_dist = {
+    "model__n_estimators": [500, 1000, 1500, 2000],
+    "model__learning_rate": [0.01, 0.03, 0.05, 0.1],
+    "model__max_depth": [3, 5, 7, 9],
+    "model__min_child_weight": [1, 5, 10],
+    "model__subsample": [0.7, 0.8, 1.0],
+    "model__colsample_bytree": [0.7, 0.8, 1.0],
+    "model__reg_lambda": [1, 5, 10],
+    "model__reg_alpha": [0, 0.1, 1]
+}
 
 pipeline = Pipeline([
     ("preprocessor", encoder),
     ("model", model)
 ])
 
-y_binned = pd.qcut(y_train, q=10, labels=False)
-skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+search = RandomizedSearchCV(
+    estimator=pipeline,
+    param_distributions=param_dist,
+    n_iter=50,
+    cv=skf_validation.split(X_train, y_binned),
+    random_state=42,
+    n_jobs=1,
+    verbose=2,
+    scoring="neg_root_mean_squared_error"
+)
 
-scores = cross_val_score(
-    pipeline,
-    X_train,
-    y_train,
-    scoring="neg_root_mean_squared_error",
-    cv=skf_validation.split(X_train, y_binned)
-) 
+search.fit(X_train, y_train)
 
-print(scores)
+print(search.best_params_)
+print(-search.best_score_)
+
+
+
 

@@ -53,5 +53,3 @@ search.fit(X_train, y_train)
 
 print(search.best_params_)
 print(-search.best_score_)
-
-#10:39
