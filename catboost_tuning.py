@@ -1,11 +1,12 @@
 import pandas as pd
+import numpy as np
 from catboost import CatBoostRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedKFold, RandomizedSearchCV
 
 df = pd.read_csv("car_listings_cleaned.csv")
 X = df.drop("car_price", axis=1)
-y = df["car_price"]
+y = np.log1p(df["car_price"])
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
@@ -28,7 +29,7 @@ model = CatBoostRegressor(
     cat_features=cat_features
 )
 
-y_binned = pd.qcut(y_train, q=10, labels=False)
+y_binned = pd.qcut(np.expm1(y_train), q=10, labels=False)
 skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
 
 param_dist = {
