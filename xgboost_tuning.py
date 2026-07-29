@@ -35,14 +35,14 @@ y_binned = pd.qcut(np.expm1(y_train), q=10, labels=False)
 skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
 
 param_dist = {
-    "model__n_estimators": [1200, 1500, 1800, 2200],
-    "model__learning_rate": [0.075, 0.1, 0.15, 0.2],
-    "model__max_depth": [8, 9, 10, 11],
-    "model__min_child_weight": [1, 2, 3, 5],
+    "model__n_estimators": [1500, 1800],
+    "model__learning_rate": [0.05, 0.075],
+    "model__max_depth": [10, 11, 12, 13, 14],
+    "model__min_child_weight": [1, 2, 3],
     "model__subsample": [0.9, 1.0],
     "model__colsample_bytree": [0.9, 1.0],
-    "model__reg_lambda": [0.5, 1, 2],
-    "model__reg_alpha": [0, 0.05, 0.1]
+    "model__reg_lambda": [1, 2, 4],
+    "model__reg_alpha": [0, 0.1, 0.2, 0.4]
 }
 
 pipeline = Pipeline([
