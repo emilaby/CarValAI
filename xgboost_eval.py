@@ -70,4 +70,4 @@ results = pd.DataFrame({
 })
 
 results.to_csv("final_model_predictions.csv", index=False)
-joblib.dump(pipeline, "model.pkl")
+joblib.dump(pipeline, "model.joblib")
