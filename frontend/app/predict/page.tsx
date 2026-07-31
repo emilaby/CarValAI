@@ -23,9 +23,31 @@ export default function Predict(){
     const [transmission, setTransmission] = React.useState<string | null>(null)
     const [fueltype, setFueltype] = React.useState<string | null>(null)
     const [serviceHist, setServiceHist] = React.useState<string | null>(null)
+    const [missingDetails, setMissingDetails] = React.useState<boolean>(false)
 
-    function handleSubmit(e: React.FormEvent){
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault()
+        
+        if (!make || !model || !variant || !bodytype || !transmission || !fueltype || !serviceHist){
+            setMissingDetails(true)
+            return
+        }
+        const formData = new FormData(e.currentTarget)
+        const data = {
+            make,
+            model,
+            variant,
+            body_type: bodytype,
+            miles: Number(formData.get("miles")),
+            engine_vol: Number(formData.get("engine_vol")),
+            transmission,
+            fuel_type: fueltype,
+            full_service: serviceHist === "No Service History" || serviceHist === "Part Service History" ? 0 : 1,
+            part_service:  serviceHist === "Full Service History" || serviceHist === "No Service History" ? 0 : 1,
+            age: new Date().getFullYear() - Number(formData.get("year"))
+        }
+        console.log(data)
     }
 
     return(
@@ -43,10 +65,13 @@ export default function Predict(){
                 <FormRow label="Miles" child={<input className="w-56" name="miles" type="text" placeholder="Enter mileage"/>}/>
                 <FormRow label="Year" child={<input className="w-56" name="year" type="text" placeholder="Enter year"/>}/>
                 <FormRow label="Engine Size" child={<input className="w-56" name="engine_vol" type="text" placeholder="Enter engine volume in Litres"/>}/>
-
-                <button type="submit" className="mt-5 bg-light-green px-3 py-2 rounded-xl">
-                    MAKE PREDICTION
-                </button>     
+                <div className="flex flex-col items-center mt-5">
+                    {missingDetails && <p className="italic text-xs mb-2 text-red-500">Please ensure all fields have been filled</p>}
+                    <button type="submit" className=" bg-light-green px-3 py-2 rounded-xl">
+                        MAKE PREDICTION
+                    </button> 
+                </div>
+    
             </form>       
         </div>
         
