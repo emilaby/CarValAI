@@ -7,16 +7,17 @@ import {
   ComboboxItem,
   ComboboxList,
 } from "@/components/ui/combobox"
-import bodytypes from "@/app/data/body_types.json"
 
-interface BodytypesComboboxProps {
-    onSelect: (bodytype: string | null) => void
+interface ServiceHistoryComboboxProps {
+    onSelect: (serviceHist: string | null) => void
 }
 
-export default function MakeCombobox({onSelect}:BodytypesComboboxProps) {
+const serviceHists = ["No Service History", "Full Service History", "Part Service History"]
+
+export default function ServiceHistoryCombobox({onSelect}:ServiceHistoryComboboxProps) {
   return (
-    <Combobox items={bodytypes} onValueChange={onSelect} >
-      <ComboboxInput className="w-56" placeholder="Select a body type" />
+    <Combobox items={serviceHists} onValueChange={onSelect}>
+      <ComboboxInput className="w-56" placeholder="Select service history" />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>

@@ -21,7 +21,7 @@ export default function ModelCombobox(props:VariantComboboxProps) {
     <>
     {props.make !== null && props.model !== null &&
     <Combobox items={cars[props.make][props.model as keyof typeof cars[typeof props.make]]} onValueChange={props.onSelect}>
-      <ComboboxInput placeholder="Select a variant" />
+      <ComboboxInput className="w-56" placeholder="Select a variant" />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>

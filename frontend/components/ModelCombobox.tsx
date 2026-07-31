@@ -20,7 +20,7 @@ export default function ModelCombobox(props:ModelComboboxProps) {
     <>
     {props.make !== null &&
     <Combobox items={Object.keys(cars[props.make])} onValueChange={props.onSelect}>
-      <ComboboxInput placeholder="Select a model" />
+      <ComboboxInput className="w-56" placeholder="Select a model" />
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
