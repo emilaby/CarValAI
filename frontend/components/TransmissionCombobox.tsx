@@ -1,0 +1,32 @@
+
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox"
+import transmissions from "@/app/data/transmissions.json"
+
+interface TransmissionsComboboxProps {
+    onSelect: (transmission: string | null) => void
+}
+
+export default function TransmissionCombobox({onSelect}:TransmissionsComboboxProps) {
+  return (
+    <Combobox items={transmissions} onValueChange={onSelect}>
+      <ComboboxInput placeholder="Select transmission" />
+      <ComboboxContent>
+        <ComboboxEmpty>No items found.</ComboboxEmpty>
+        <ComboboxList>
+          {(item) => (
+            <ComboboxItem key={item} value={item}>
+              {item}
+            </ComboboxItem>
+          )}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  )
+}
