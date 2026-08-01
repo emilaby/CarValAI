@@ -17,10 +17,8 @@ type ModelComboboxProps = {
 
 export default function ModelCombobox(props:ModelComboboxProps) {
   return (
-    <>
-    {props.make !== null &&
-    <Combobox items={Object.keys(cars[props.make])} onValueChange={props.onSelect}>
-      <ComboboxInput className="w-56" placeholder="Select a model" />
+    <Combobox items={props.make === null ? [] : Object.keys(cars[props.make])} onValueChange={props.onSelect}>
+      <ComboboxInput className="w-56" placeholder="Select a model" disabled={props.make === null}/>
       <ComboboxContent>
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
@@ -31,7 +29,6 @@ export default function ModelCombobox(props:ModelComboboxProps) {
           )}
         </ComboboxList>
       </ComboboxContent>
-    </Combobox>}
-    </>
+    </Combobox>
   )
 }
