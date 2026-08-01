@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
 import Link from "next/link"
+import ForecastGraph from "@/components/ForecastGraph"
 
 type Prediction = {
     years_from_present: number,
@@ -42,16 +43,41 @@ export default function Result(){
         if(carDataFetched){
             setCarData(JSON.parse(carDataFetched))
         }
-    }, [])    
+    }, [])
+
     return(
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-10">
             
             {predictions && predictions[0] && carData &&
-            <div>
-                <h1 className="text-2xl">Your valuation:</h1>
-                <p className="text-3xl font-bold">£{Math.round(predictions[0]["price"])}</p>
-                <p>For {vowels.includes(carData["make"].charAt(0).toLowerCase()) ? "an" : "a"} {carData["make"]} {carData["model"]}</p>
-            </div>}
+            <div className="flex flex-col items-center w-full">
+                <h1 className="text-2xl mb-4 font-semibold">Your valuation</h1>
+                <p className="mb-10 text-xl">{new Date().getFullYear() - carData["age"]} {carData["make"]} {carData["model"]} {carData["variant"]}</p>
+                <div className="flex items-baseline justify-between w-166">
+                    <div className="flex flex-col items-center">
+                        <p className="text-xs text-secondary-text">LOW</p>
+                        <p className="text-secondary-text">£{Math.round(predictions[0]["price"] * 0.923).toLocaleString()}</p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                    <p className="text-5xl font-extrabold mb-2">£{Math.round(predictions[0]["price"]).toLocaleString()}</p>
+                    <p className="text-xl text-light-green"> ▼</p>
+                    </div>
+
+                    <div className="flex flex-col items-center">
+                        <p className="text-xs text-secondary-text">HIGH</p>
+                        <p className="text-secondary-text">£{Math.round(predictions[0]["price"] * 1.077).toLocaleString()}</p>
+                    </div>
+                </div>
+ 
+                <div className="mb-30 h-8 w-152 rounded-full bg-linear-to-r from-red-500 via-yellow-400 to-green-500 " />
+                <div className="w-7/10 border-t border-gray-600"/>
+                <h1 className="text-2xl font-semibold mt-10 mb-3">Value Forecast</h1>
+                <h2 className="text-secondary-text">Valuation forecast over the next 5 years</h2>
+                <ForecastGraph data={predictions}/>
+                <p className="mb-10"></p>
+            </div>
+           
+            }
+            
         
         </div>
         
