@@ -18,8 +18,8 @@ interface MakeComboboxProps {
 export default function MakeCombobox({onSelect}:MakeComboboxProps) {
   return (
     <Combobox items={makes} onValueChange={onSelect}>
-      <ComboboxInput className="w-56" placeholder="Select a make" />
-      <ComboboxContent>
+      <ComboboxInput className="w-64 h-13" placeholder="Select a make" />
+      <ComboboxContent className="bg-med-green text-secondary-text">
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (

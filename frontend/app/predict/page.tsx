@@ -10,9 +10,8 @@ import TransmissionCombobox from "@/components/TransmissionCombobox"
 import FueltypeCombobox from "@/components/FueltypeCombobox"
 import ServiceHistoryCombobox from "@/components/ServiceHistoryCombobox"
 import FormRow from "@/components/FormRow"
-import { InputItems } from "openai/resources/responses.js"
 import { useRouter } from "next/navigation"
-
+import { Input } from "@/components/ui/input"
 
 export default function Predict(){
     const [make, setMake] = React.useState<keyof typeof cars | null>(null)
@@ -83,20 +82,35 @@ export default function Predict(){
     }
 
     return(
-        <div className="flex flex-col items-center min-h-full w-full">
-            <h1 className="text-xl mt-5 mb-4">PREDICTION DATA FORM</h1>
-            
+        <div className="flex flex-col items-center min-h-full w-full mt-10">            
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center">
-                <FormRow label="Make" child={<MakeCombobox onSelect={setMake}/>}/>
-                <FormRow label="Model" child={<ModelCombobox onSelect={setModel} make={make}/>}/>
-                <FormRow label="Variant" child={<VariantCombobox onSelect={setVariant} make={make} model={model}/>}/>
-                <FormRow label="Body Type" child={<BodytypeCombobox onSelect={setBodytype} />}/>
-                <FormRow label="Transmission" child={<TransmissionCombobox onSelect={setTransmission}/>}/>
-                <FormRow label="Fuel Type" child={<FueltypeCombobox onSelect={setFueltype}/>}/>
-                <FormRow label="Service History" child={<ServiceHistoryCombobox onSelect={setServiceHist}/>}/>
-                <FormRow label="Miles" child={<input className="w-56" name="miles" type="text" placeholder="Enter mileage"/>}/>
-                <FormRow label="Year" child={<input className="w-56" name="year" type="text" placeholder="Enter year"/>}/>
-                <FormRow label="Engine Size" child={<input className="w-56" name="engineVol" type="text" placeholder="Enter engine volume in Litres"/>}/>
+                <div className="grid grid-cols-3 items-center justify-center mb-10 border border-gray-500 rounded-3xl p-10">
+                    <h1 className="col-span-1 text-3xl text-left">VEHICLE</h1>
+                    <div className="col-span-2 grid grid-cols-2 gap-5 p-10">
+                        <FormRow label="MAKE" child={<MakeCombobox onSelect={setMake}/>}/>
+                        <FormRow label="MODEL" child={<ModelCombobox onSelect={setModel} make={make}/>}/>
+                        <FormRow label="BODY TYPE" child={<BodytypeCombobox onSelect={setBodytype} />}/>
+                    </div>
+                </div>
+                
+                <div className="grid grid-cols-3 text-4xl items-center justify-center mb-10 border border-gray-500 rounded-3xl p-10">
+                    <h1 className="col-span-1 text-3xl">SPECS</h1>
+                    <div className="col-span-2 grid grid-cols-2 gap-5 p-10">
+                        <FormRow label="VARIANT" child={<VariantCombobox onSelect={setVariant} make={make} model={model}/>}/>
+                        <FormRow label="TRANSMISSION" child={<TransmissionCombobox onSelect={setTransmission}/>}/>
+                        <FormRow label="FUEL TYPE" child={<FueltypeCombobox onSelect={setFueltype}/>}/>
+                        <FormRow label="ENGINE SIZE" child={<Input className="w-64 h-13 placeholder:text-secondary-text" name="engineVol" type="text" placeholder="Enter engine volume in Litres"/>}/>
+                    </div>
+                </div>
+                <div className="grid grid-cols-3 text-4xl items-center justify-center border border-gray-500 rounded-3xl p-10">
+                    <h1 className="col-span-1 text-3xl">CONDITION</h1>
+                    <div className="col-span-2 grid grid-cols-2 gap-5  p-10">
+                        <FormRow label="SERVICE HISORY" child={<ServiceHistoryCombobox onSelect={setServiceHist}/>}/>
+                        <FormRow label="MILES" child={<Input className="w-64 h-13 placeholder:text-secondary-text" name="miles" type="text" placeholder="Enter mileage"/>}/>
+                        <FormRow label="YEAR" child={<Input className="w-64 h-13 placeholder:text-secondary-text" name="year" type="text" placeholder="Enter year"/>}/>
+                    </div>
+                </div>
+
                 <div className="flex flex-col items-center mt-5">
                     {missingDetails && <p className="italic text-xs mb-2 text-red-500">Please ensure all fields have been filled</p>}
                     <button type="submit" className=" bg-light-green px-3 py-2 rounded-xl">

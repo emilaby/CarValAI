@@ -1,7 +1,7 @@
 export default function FormRow({ label, child }:{label:string, child:React.ReactNode}){
     return(
-        <div className="flex items-center gap-4 w-full">
-            <label className="w-40 text-secondary-text text-left">{label}:</label>
+        <div className="flex flex-col gap-1 w-full">
+            <label className="ml-1 w-40 text-secondary-text text-left text-xs">{label}</label>
             {child}
         </div>
     )

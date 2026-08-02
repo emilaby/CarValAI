@@ -13,11 +13,11 @@ interface BodytypesComboboxProps {
     onSelect: (bodytype: string | null) => void
 }
 
-export default function MakeCombobox({onSelect}:BodytypesComboboxProps) {
+export default function BodytypeCombobox({onSelect}:BodytypesComboboxProps) {
   return (
     <Combobox items={bodytypes} onValueChange={onSelect} >
-      <ComboboxInput className="w-56" placeholder="Select a body type" />
-      <ComboboxContent>
+      <ComboboxInput className="w-64 h-13" placeholder="Select a body type" />
+      <ComboboxContent className="bg-med-green text-secondary-text">
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (
