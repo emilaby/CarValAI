@@ -14,9 +14,6 @@ export default function Header(){
             <Link href="/predict" className={`tranisition hover:text-light-green ${pathname === "/predict" ? "text-light-green" : ""}`}>
                 <p>Predict</p>
             </Link>
-            <Link href="/" className={`transition hover:text-light-green ${pathname === "" ? "text-light-green" : ""}`}>
-                <p>About</p>
-            </Link>
         </div>    
         
     </header>
