@@ -17,8 +17,8 @@ const serviceHists = ["No Service History", "Full Service History", "Part Servic
 export default function ServiceHistoryCombobox({onSelect}:ServiceHistoryComboboxProps) {
   return (
     <Combobox items={serviceHists} onValueChange={onSelect}>
-      <ComboboxInput className="w-64 h-13" placeholder="Select service history" />
-      <ComboboxContent className="bg-med-green text-secondary-text">
+      <ComboboxInput className="w-64 h-13 bg-dark-green" placeholder="Select service history" />
+      <ComboboxContent className="bg-green text-secondary-text">
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (

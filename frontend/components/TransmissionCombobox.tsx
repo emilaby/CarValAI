@@ -16,8 +16,8 @@ interface TransmissionsComboboxProps {
 export default function TransmissionCombobox({onSelect}:TransmissionsComboboxProps) {
   return (
     <Combobox items={transmissions} onValueChange={onSelect}>
-      <ComboboxInput className="w-64 h-13" placeholder="Select transmission" />
-      <ComboboxContent className="bg-med-green text-secondary-text">
+      <ComboboxInput className="w-64 h-13 bg-dark-green" placeholder="Select transmission" />
+      <ComboboxContent className="bg-green text-secondary-text">
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (

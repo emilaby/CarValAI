@@ -10,10 +10,12 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --color-dark-green: #263238;
-  --color-med-green: #354f52;
+  --color-green: #465B56;
+  --color-slightly-lighter-green: #304046;
+  --color-med-green: #6F9077;
   --color-light-green: #84a98c;
-  --color-primary-text: #FFFFFF;
-  --color-secondary-text: #E8EDEB;
+  --color-primary-text: #F1F5F9;
+  --color-secondary-text: #D5DEE2;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -62,7 +64,7 @@ html, body {
 
 body {
   background: #263238;
-  color: #FFFFFF;
+  color: #F1F5F9;
 }
 
 :root {

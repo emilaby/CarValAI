@@ -16,8 +16,8 @@ interface FueltypeComboboxProps {
 export default function FueltypeCombobox({onSelect}:FueltypeComboboxProps) {
   return (
     <Combobox items={fuelTypes} onValueChange={onSelect}>
-      <ComboboxInput className="w-64 h-13" placeholder="Select fuel type" />
-      <ComboboxContent className="bg-med-green text-secondary-text">
+      <ComboboxInput className="w-64 h-13 bg-dark-green" placeholder="Select fuel type" />
+      <ComboboxContent className="bg-green text-secondary-text">
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (

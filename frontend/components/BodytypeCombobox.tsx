@@ -16,8 +16,8 @@ interface BodytypesComboboxProps {
 export default function BodytypeCombobox({onSelect}:BodytypesComboboxProps) {
   return (
     <Combobox items={bodytypes} onValueChange={onSelect} >
-      <ComboboxInput className="w-64 h-13" placeholder="Select a body type" />
-      <ComboboxContent className="bg-med-green text-secondary-text">
+      <ComboboxInput className="w-64 h-13 bg-dark-green" placeholder="Select a body type" />
+      <ComboboxContent className="bg-green text-secondary-text">
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (

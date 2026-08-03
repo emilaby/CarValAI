@@ -50,7 +50,7 @@ export default function Result(){
             
             {predictions && predictions[0] && carData &&
             <div className="flex flex-col items-center w-full">
-                <h1 className="text-2xl mb-4 font-semibold">Your valuation</h1>
+                <h1 className="text-3xl mb-4 font-semibold">Your valuation</h1>
                 <p className="mb-10 text-xl">{new Date().getFullYear() - carData["age"]} {carData["make"]} {carData["model"]} {carData["variant"]}</p>
                 <div className="flex items-baseline justify-between w-166">
                     <div className="flex flex-col items-center">
@@ -70,7 +70,7 @@ export default function Result(){
  
                 <div className="mb-30 h-8 w-152 rounded-full bg-linear-to-r from-red-500 via-yellow-400 to-green-500 " />
                 <div className="w-7/10 border-t border-gray-600"/>
-                <h1 className="text-2xl font-semibold mt-10 mb-3">Value Forecast</h1>
+                <h1 className="text-3xl font-semibold mt-10 mb-3">Value Forecast</h1>
                 <h2 className="text-secondary-text">Valuation forecast over the next 5 years</h2>
                 <ForecastGraph data={predictions}/>
                 <p className="mb-10"></p>

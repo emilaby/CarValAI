@@ -14,15 +14,15 @@ export default function ForecastGraph({ data } : { data: Prediction[] }) {
     return (
         <>
             <div className="grid grid-cols-3 w-4/5 gap-4 mt-10 mb-15">
-                <div className="flex flex-col items-center justify-center gap-2 border border-gray-500 rounded-2xl px-5 py-5 ">
+                <div className="flex flex-col items-center justify-center gap-2 border border-gray-500 rounded-2xl px-5 py-5 bg-slightly-lighter-green shadow-2xl">
                     <h2>Estimated change in value over 5yrs: </h2>
                     <p className={`${valueDecreased ? "text-red-600" : "text-green-500"} ${"text-xl"}`}>{valueDecreased ? "-£" : "£"}{Math.abs(valueChange)}</p>
                 </div>
-                <div className="flex flex-col items-center justify-center gap-2 border border-gray-500 rounded-2xl px-5 py-5">
+                <div className="flex flex-col items-center justify-center gap-2 border border-gray-500 rounded-2xl px-5 py-5 bg-slightly-lighter-green shadow-2xl">
                     <h2>Estimated % change in value over 5yrs: </h2>
                     <p className={`${valueDecreased ? "text-red-600" : "text-green-500"} ${"text-xl"}`}>{valueDecreased ? "▼" : "▲"} {percLost}%</p>
                 </div>
-                <div className="flex flex-col items-center justify-center gap-2 border border-gray-500 rounded-2xl px-5 py-5">
+                <div className="flex flex-col items-center justify-center gap-2 border border-gray-500 rounded-2xl px-5 py-5 bg-slightly-lighter-green shadow-2xl">
                     <h2>Estimated total mileage after 5yrs: </h2>
                     <p>{mileageChange + data[0]["miles"]} miles</p>
                 </div>
