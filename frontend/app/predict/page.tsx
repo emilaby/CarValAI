@@ -85,24 +85,24 @@ export default function Predict(){
         <div className="flex flex-col items-center min-h-full w-full py-10">            
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center">
                 <FormCard children={[
-                    <FormRow label="MAKE" child={<MakeCombobox onSelect={setMake}/>}/>,
-                    <FormRow label="MODEL" child={<ModelCombobox onSelect={setModel} make={make}/>}/>,
-                    <FormRow label="BODY TYPE" child={<BodytypeCombobox onSelect={setBodytype} />}/>
-                ]} heading="Vehicle"
+                    <FormRow label="MAKE" child={<MakeCombobox onSelect={setMake}/>} key="make" />,
+                    <FormRow label="MODEL" child={<ModelCombobox onSelect={setModel} make={make}/>} key="model"/>,
+                    <FormRow label="BODY TYPE" child={<BodytypeCombobox onSelect={setBodytype}/>} key="body"/>
+                ]} heading="Vehicle" 
                 />
                 
                 <FormCard children={[
-                    <FormRow label="VARIANT" child={<VariantCombobox onSelect={setVariant} make={make} model={model}/>}/>,
-                    <FormRow label="TRANSMISSION" child={<TransmissionCombobox onSelect={setTransmission}/>}/>,
-                    <FormRow label="FUEL TYPE" child={<FueltypeCombobox onSelect={setFueltype}/>}/>,
-                    <FormRow label="ENGINE SIZE" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="engineVol" type="text" placeholder="Enter engine volume in Litres"/>}/>
-                ]} heading="Specs"
+                    <FormRow label="VARIANT" child={<VariantCombobox onSelect={setVariant} make={make} model={model}/>}  key="variant"/>,
+                    <FormRow label="TRANSMISSION" child={<TransmissionCombobox onSelect={setTransmission}/>} key="transmission"/>,
+                    <FormRow label="FUEL TYPE" child={<FueltypeCombobox onSelect={setFueltype}/>} key="fuel"/>,
+                    <FormRow label="ENGINE SIZE" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="engineVol" type="text" placeholder="Enter engine volume in Litres"/>} key="engineSize"/>
+                ]} heading="Specs" 
                 />
 
                 <FormCard children={[
-                    <FormRow label="SERVICE HISORY" child={<ServiceHistoryCombobox onSelect={setServiceHist}/>}/>,
-                    <FormRow label="MILES" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="miles" type="text" placeholder="Enter mileage"/>}/>,
-                    <FormRow label="YEAR" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="year" type="text" placeholder="Enter year"/>}/>
+                    <FormRow label="SERVICE HISTORY" child={<ServiceHistoryCombobox onSelect={setServiceHist}/>} key="service"/>,
+                    <FormRow label="MILES" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="miles" type="text" placeholder="Enter mileage"/>} key="miles"/>,
+                    <FormRow label="YEAR" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="year" type="text" placeholder="Enter year"/>} key="year"/>
                 ]} heading="Condition"
                 />
 

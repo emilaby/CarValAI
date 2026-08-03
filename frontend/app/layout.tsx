@@ -3,8 +3,6 @@ import { IBM_Plex_Sans, Geist } from "next/font/google"
 import Header from "@/components/Header"
 import "./globals.css"
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
