@@ -52,7 +52,7 @@ export default function Predict(){
         }
 
         try{
-            const res = await fetch("http://localhost:8000/predict", {
+            const res = await fetch("https://carvalai-backend-983599078404.europe-west2.run.app/predict", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
