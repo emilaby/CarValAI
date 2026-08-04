@@ -4,9 +4,18 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 import numpy as np
+import os
+
+print("CURRENT DIR:", os.getcwd())
+print("FILES:", os.listdir())
+print("MODEL SIZE:", os.path.getsize("model.joblib"))
+
 
 app = FastAPI(title="Car Price Prediction API")
 model = joblib.load("model.joblib")
+
+print("MODEL LOADED")
+
 
 app.add_middleware(
     CORSMiddleware,
