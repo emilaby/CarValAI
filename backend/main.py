@@ -4,22 +4,22 @@ from pydantic import BaseModel
 import joblib
 import pandas as pd
 import numpy as np
+from google.cloud import storage
 import os
 
-print("CURRENT DIR:", os.getcwd())
-print("FILES:", os.listdir())
-print("MODEL SIZE:", os.path.getsize("model.joblib"))
+if not os.path.exists("model.joblib"):
+    client = storage.Client()
+    bucket = client.bucket("carvalai-model")
+    blob = bucket.blob("model.joblib")
+    blob.download_to_filename("model.joblib")
 
-
-app = FastAPI(title="Car Price Prediction API")
 model = joblib.load("model.joblib")
 
-print("MODEL LOADED")
-
+app = FastAPI(title="Car Price Prediction API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "https://carvalai.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
