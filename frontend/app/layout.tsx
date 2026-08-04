@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { IBM_Plex_Sans, Geist } from "next/font/google"
+import { IBM_Plex_Sans } from "next/font/google"
 import Header from "@/components/Header"
 import "./globals.css"
 
@@ -11,7 +11,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 export const metadata: Metadata = {
   title: "Car Price Predictor",
   description: "AI powered vehicle valuation",
-};
+}
 
 export default function RootLayout({
   children,
