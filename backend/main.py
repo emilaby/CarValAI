@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Header, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import pandas as pd
@@ -23,15 +22,6 @@ app = FastAPI(title="Car Price Prediction API")
 API_KEY = os.getenv("BACKEND_API_KEY")
 if not API_KEY:
     raise RuntimeError("BACKEND_API_KEY environment variable is not set")
-
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://carvalai.vercel.app"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 ANNUAL_MILEAGE = 8000
 
