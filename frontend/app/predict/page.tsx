@@ -82,7 +82,7 @@ export default function Predict(){
     }
 
     return(
-        <div className="flex flex-col items-center min-h-full w-full py-10">            
+        <div className="flex flex-col items-center jus min-h-full w-full py-10">            
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 items-center">
                 <FormCard children={[
                     <FormRow label="MAKE" child={<MakeCombobox onSelect={setMake}/>} key="make" />,
