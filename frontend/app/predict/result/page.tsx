@@ -2,6 +2,7 @@
 import React from "react"
 import ForecastGraph from "@/components/ForecastGraph"
 import Valuation from "@/components/Valuation"
+import Loading from "@/components/Loading"
 
 type Prediction = {
     years_from_present: number,
@@ -38,7 +39,9 @@ export default function Result(){
     }, [])
 
     return(
-        <div className="flex flex-col items-center mt-10 pb-10">
+        <div className="flex flex-col items-center mt-10 pb-10 min-h-screen w-full">
+            {(!predictions || !carData) && <Loading/>}
+
             {predictions && predictions[0] && carData &&
             <div className="flex flex-col items-center w-full">
                 <Valuation carData={carData} prediction={predictions[0]}/>

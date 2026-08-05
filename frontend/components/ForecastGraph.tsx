@@ -22,7 +22,7 @@ export default function ForecastGraph({ data } : { data: Prediction[] }) {
                     <h2>Estimated % change in value over 5yrs: </h2>
                     <p className={`${valueDecreased ? "text-red-600" : "text-green-500"} ${"text-xl"}`}>{valueDecreased ? "▼" : "▲"} {percLost}%</p>
                 </div>
-                <div className="flex flex-col h-30 items-center justify-center gap-8 border border-gray-500 rounded-2xl p-4 lg:p-5 bg-slightly-lighter-green shadow-2xl">
+                <div className="flex flex-col h-30 items-center justify-center gap-2 border border-gray-500 rounded-2xl p-4 lg:p-5 bg-slightly-lighter-green shadow-2xl">
                     <h2>Estimated total mileage after 5yrs: </h2>
                     <p>{mileageChange + data[0]["miles"]} miles</p>
                 </div>
