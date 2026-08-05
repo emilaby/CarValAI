@@ -9,7 +9,7 @@ type Prediction = {
 export default function ForecastGraph({ data } : { data: Prediction[] }) {
     const valueChange = Math.round(data[0]["price"] - data[data.length - 1]["price"])
     const valueDecreased = valueChange >= 0
-    const percLost = Math.round((data[0]["price"] - data[data.length - 1]["price"]) / data[0]["price"] * 100)
+    const percLost = Math.abs(Math.round((data[0]["price"] - data[data.length - 1]["price"]) / data[0]["price"] * 100))
     const mileageChange = data[data.length - 1]["miles"] - data[0]["miles"]
     return (
         <>
