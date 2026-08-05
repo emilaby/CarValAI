@@ -54,10 +54,10 @@ export default function Predict(){
         }
 
         try{
-            const res = await fetch("https://carvalai-backend-983599078404.europe-west2.run.app/predict", {
+            const res = await fetch("/api/predict", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
+                headers:{
+                    "Content-Type":"application/json"
                 },
                 body: JSON.stringify(data)
             })

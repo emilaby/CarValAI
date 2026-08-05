@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
@@ -13,9 +13,17 @@ if not os.path.exists("model.joblib"):
     blob = bucket.blob("model.joblib")
     blob.download_to_filename("model.joblib")
 
-model = joblib.load("model.joblib")
+try:
+    model = joblib.load("model.joblib")
+except Exception:
+    raise RuntimeError("Failed to load ML model")
 
 app = FastAPI(title="Car Price Prediction API")
+
+API_KEY = os.getenv("BACKEND_API_KEY")
+if not API_KEY:
+    raise RuntimeError("BACKEND_API_KEY environment variable is not set")
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -42,7 +50,13 @@ class Car(BaseModel):
 
 
 @app.post("/predict")
-def predict(car: Car):
+def predict(car: Car, api_key: str = Header(None)):
+    if api_key != API_KEY:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid API key"
+        )
+
     predictions = []
 
     for year in range(6):
@@ -59,8 +73,14 @@ def predict(car: Car):
             "part_service": car.part_service,
             "age": car.age + year
         }])
-        
-        prediction = model.predict(features)
+
+        try:
+            prediction = model.predict(features)
+        except Exception:
+            raise HTTPException(
+                status_code=500,
+                detail="Prediction failed"
+            )
 
         predictions.append({
             "years_from_present": year,
@@ -71,3 +91,7 @@ def predict(car: Car):
     return {
         "predictions": predictions
     }
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
