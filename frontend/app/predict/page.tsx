@@ -12,6 +12,7 @@ import FormRow from "@/components/FormRow"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import FormCard from "@/components/FormCard"
+import Loading from "@/components/Loading"
 
 export default function Predict(){
     const [make, setMake] = React.useState<keyof typeof cars | null>(null)
@@ -22,6 +23,7 @@ export default function Predict(){
     const [fueltype, setFueltype] = React.useState<string | null>(null)
     const [serviceHist, setServiceHist] = React.useState<string | null>(null)
     const [missingDetails, setMissingDetails] = React.useState<boolean>(false)
+    const [loading, setLoading] = React.useState<boolean>(false)
 
     const router = useRouter()
 
@@ -52,6 +54,8 @@ export default function Predict(){
             part_service:  serviceHist === "Full Service History" || serviceHist === "No Service History" ? 0 : 1,
             age: new Date().getFullYear() - Number(year)
         }
+
+        setLoading(true)
 
         try{
             const res = await fetch("/api/predict", {
@@ -112,8 +116,8 @@ export default function Predict(){
 
                 <div className="flex flex-col items-center mt-5">
                     {missingDetails && <p className="italic text-xs mb-2 text-red-500">Please ensure all fields have been filled</p>}
-                    <button type="submit" className="bg-light-green px-10 py-4 rounded-xl text-lg font-semibold drop-shadow-lg hover:bg-med-green transition hover:scale-105">
-                        MAKE PREDICTION
+                    <button type="submit" className="bg-light-green flex items-center justify-center w-64 h-16 px-10 py-4 rounded-xl text-lg font-semibold drop-shadow-lg hover:bg-med-green transition hover:scale-105">
+                        {loading ? <Loading/> : "MAKE PREDICTION"}
                     </button>
                 </div>
     
