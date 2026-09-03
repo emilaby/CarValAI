@@ -4,14 +4,16 @@ import Header from "@/components/Header"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 
+
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
-  title: "Car Price Predictor",
-  description: "AI powered vehicle valuation",
+  viewport: "width=device-width, initial-scale=1",
+  title: "CarValAI | AI Powered Car Valuations",
+  description: "Predicts current vehicle value and a forecast for the next 5 years",
 }
 
 export default function RootLayout({
