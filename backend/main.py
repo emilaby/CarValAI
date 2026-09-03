@@ -6,6 +6,11 @@ import numpy as np
 from google.cloud import storage
 import os
 
+"""
+Loads the model from Google Cloud and via the predict endpoint and 
+passes in required data fields to make a prediction and returns the prediction from the model
+"""
+
 if not os.path.exists("model.joblib"):
     client = storage.Client()
     bucket = client.bucket("carvalai-model")

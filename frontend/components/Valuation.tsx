@@ -1,22 +1,4 @@
-type Car = {
-    make: string,
-    model: string,
-    variant: string,
-    body_type: string,
-    fuel_type: string,
-    transmission: string,
-    age: number,
-    engine_vol: number,
-    full_service: number,
-    part_service: number,
-    miles: number
-}
-
-type Prediction = {
-    years_from_present: number,
-    miles: number,
-    price: number
-}
+import { Car, Prediction } from "@/types"
 
 export default function Valuation({carData, prediction}:{carData:Car, prediction:Prediction}){
     return(

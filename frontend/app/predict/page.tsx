@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import FormCard from "@/components/FormCard"
 import Loading from "@/components/Loading"
+import { Car } from "@/types"
 
 export default function Predict(){
     const [make, setMake] = React.useState<keyof typeof cars | null>(null)
@@ -41,7 +42,7 @@ export default function Predict(){
         }
 
         
-        const data = {
+        const data: Car = {
             make,
             model,
             variant,

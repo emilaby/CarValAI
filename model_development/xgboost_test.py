@@ -39,6 +39,10 @@ pipeline = Pipeline([
     ("preprocessor", encoder),
     ("model", model)
 ])
+
+y_binned = pd.qcut(np.expm1(y_train), q=10, labels=False)
+skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+
 """
 y_binned = pd.qcut(y_train, q=10, labels=False)
 skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)

@@ -1,4 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
+import { Prediction } from "@/types"
+
+// Requests FastAPI backend for prediction, recieves and returns it.
+
+type Predictions = {
+    predictions: Prediction[]
+}
 
 export async function POST(req: NextRequest){
     const features = await req.json()
@@ -14,9 +21,9 @@ export async function POST(req: NextRequest){
         }
     )
 
-    const data = await response.json()
+    const data: Predictions = await response.json()
 
-    return NextResponse.json(data, {
+    return NextResponse.json(data , {
         status: response.status
     })
 }

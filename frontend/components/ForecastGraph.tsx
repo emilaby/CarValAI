@@ -1,10 +1,5 @@
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid } from "recharts"
-
-type Prediction = {
-    years_from_present: number,
-    miles: number,
-    price: number
-}
+import { Prediction } from "@/types"
 
 export default function ForecastGraph({ data } : { data: Prediction[] }) {
     const valueChange = Math.round(data[0]["price"] - data[data.length - 1]["price"])
