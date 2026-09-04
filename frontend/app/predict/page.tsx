@@ -104,14 +104,14 @@ export default function Predict(){
                     <FormRow label="VARIANT" child={<VariantCombobox onSelect={setVariant} make={make} model={model}/>}  key="variant"/>,
                     <FormRow label="TRANSMISSION" child={<TransmissionCombobox onSelect={setTransmission}/>} key="transmission"/>,
                     <FormRow label="FUEL TYPE" child={<FueltypeCombobox onSelect={setFueltype}/>} key="fuel"/>,
-                    <FormRow label="ENGINE SIZE" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="engineVol" type="text" placeholder="Enter engine volume in Litres"/>} key="engineSize"/>
+                    <FormRow label="ENGINE SIZE" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="engineVol" type="number" step="0.1" min="0" placeholder="Enter engine volume in Litres"/>} key="engineSize"/>
                 ]} heading="Specs" 
                 />
 
                 <FormCard children={[
                     <FormRow label="SERVICE HISTORY" child={<ServiceHistoryCombobox onSelect={setServiceHist}/>} key="service"/>,
-                    <FormRow label="MILES" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="miles" type="text" placeholder="Enter mileage"/>} key="miles"/>,
-                    <FormRow label="YEAR" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="year" type="text" placeholder="Enter year"/>} key="year"/>
+                    <FormRow label="MILES" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="miles" type="number" min="0" placeholder="Enter mileage"/>} key="miles"/>,
+                    <FormRow label="YEAR" child={<Input className="w-64 h-13 placeholder:text-secondary-text bg-dark-green" name="year" type="number" min="0" placeholder="Enter year"/>} key="year"/>
                 ]} heading="Condition"
                 />
 
