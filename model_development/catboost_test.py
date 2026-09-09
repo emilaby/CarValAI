@@ -31,8 +31,6 @@ model = CatBoostRegressor(
 y_binned = pd.qcut(y_train, q=10, labels=False)
 skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
 
-kf_validation = KFold(n_splits=3, shuffle=True, random_state=42)
-
 scores = cross_val_score(
     model,
     X_train,

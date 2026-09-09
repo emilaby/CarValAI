@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import TargetEncoder
@@ -43,10 +44,6 @@ pipeline = Pipeline([
 y_binned = pd.qcut(np.expm1(y_train), q=10, labels=False)
 skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
 
-"""
-y_binned = pd.qcut(y_train, q=10, labels=False)
-skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
-
 scores = cross_val_score(
     pipeline,
     X_train,
@@ -56,9 +53,4 @@ scores = cross_val_score(
 ) 
 
 print(scores)
-"""
-pipeline.fit(X_train, y_train)
 
-xgb = pipeline.named_steps["model"]
-print(xgb.feature_importances_)
-print(xgb.feature_names)
