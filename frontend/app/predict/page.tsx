@@ -24,6 +24,8 @@ export default function Predict(){
     const [fueltype, setFueltype] = React.useState<string | null>(null)
     const [serviceHist, setServiceHist] = React.useState<string | null>(null)
     const [missingDetails, setMissingDetails] = React.useState<boolean>(false)
+    const [errorFetching, setErrorFetching] = React.useState<boolean>(false)
+
     const [loading, setLoading] = React.useState<boolean>(false)
 
     const router = useRouter()
@@ -69,6 +71,9 @@ export default function Predict(){
 
             if (!res.ok){
                 console.error("error fetching")
+                setLoading(false)
+                setErrorFetching(true)
+                setMissingDetails(false)
                 return
             }
 
@@ -87,6 +92,9 @@ export default function Predict(){
 
         } catch (err){
             console.error(err)
+            setLoading(false)
+            setErrorFetching(true)
+            setMissingDetails(false)
         }
     }
 
@@ -117,6 +125,7 @@ export default function Predict(){
 
                 <div className="flex flex-col items-center mt-5">
                     {missingDetails && <p className="italic text-xs mb-2 text-red-500">Please ensure all fields have been filled</p>}
+                    {errorFetching && <p className="italic text-xs mb-2 text-red-500">Unable to get your valuation. Please try again.</p>}
                     <button type="submit" className="bg-light-green flex items-center justify-center w-64 h-16 px-10 py-4 rounded-xl text-lg font-semibold drop-shadow-lg hover:bg-med-green transition hover:scale-105">
                         {loading ? <Loading/> : "MAKE PREDICTION"}
                     </button>
