@@ -1,4 +1,4 @@
-# CarValAI
+# CarValAI 🚗
 
 Check it out here: [CarValAI](https://www.carvalai.co.uk)
 
