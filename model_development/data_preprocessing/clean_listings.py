@@ -1,12 +1,13 @@
 import pandas as pd
+from pathlib import Path
 
 def clean_listings():
-    df = pd.read_csv("car_listings.csv")
+    df = pd.read_csv(Path(__file__).resolve().parent.parent / "data" / "car_listings.csv")
 
     df = df.rename(columns={"feul_type":"fuel_type"})
 
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
-    df["age"] = 2022 - df["year"]
+    df["age"] = 2022 - df["year"] # dataset is from 2022
 
     df = df.dropna(subset=["age"])
 
@@ -42,4 +43,4 @@ def clean_listings():
     df["transmission"] = df["transmission"].str.strip().str.lower()
     df["fuel_type"] = df["fuel_type"].str.strip().str.lower()
 
-    df.to_csv("car_listings_cleaned.csv", index=False)
+    df.to_csv(Path(__file__).resolve().parent.parent / "data" / "car_listings_cleaned.csv", index=False)

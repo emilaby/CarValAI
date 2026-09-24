@@ -8,6 +8,7 @@ import {Car, Prediction} from "@/types"
 export default function Result(){
     const [predictions, setPredictions] = React.useState<Prediction[]>([])
     const [carData, setCarData] = React.useState<Car>()
+
     React.useEffect(() => {
         const predictionsFetched = sessionStorage.getItem("predictions")
         const carDataFetched = sessionStorage.getItem("car")

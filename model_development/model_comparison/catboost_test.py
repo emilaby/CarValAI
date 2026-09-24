@@ -1,9 +1,10 @@
 import pandas as pd
 from catboost import CatBoostRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold, StratifiedKFold, cross_val_score
+from sklearn.model_selection import StratifiedKFold, cross_val_score
+from pathlib import Path
 
-df = pd.read_csv("car_listings_cleaned.csv")
+df = pd.read_csv(Path(__file__).resolve().parent.parent / "data" / "car_listings_cleaned.csv")
 X = df.drop("car_price", axis=1)
 y = df["car_price"]
 

@@ -1,15 +1,15 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import TargetEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import KFold, cross_val_score
+from sklearn.model_selection import StratifiedKFold, cross_val_score
+from pathlib import Path
 
-
-
-df = pd.read_csv("car_listings_cleaned.csv")
+df = pd.read_csv(Path(__file__).resolve().parent.parent / "data" / "car_listings_cleaned.csv")
 X = df.drop("car_price", axis=1)
 y = df["car_price"]
 
@@ -31,14 +31,15 @@ pipeline = Pipeline([
 ])
 
 
-kf_validation = KFold(n_splits=3, shuffle=True, random_state=42)
+y_binned = pd.qcut(np.expm1(y_train), q=10, labels=False)
+skf_validation = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
 
 scores = cross_val_score(
     pipeline,
     X_train,
     y_train,
     scoring="neg_root_mean_squared_error",
-    cv=kf_validation
+    cv=skf_validation.split(X_train, y_binned)
 ) 
 
 print(scores)

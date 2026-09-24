@@ -7,9 +7,9 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import StratifiedKFold, RandomizedSearchCV
 from xgboost import XGBRegressor
+from pathlib import Path
 
-
-df = pd.read_csv("car_listings_cleaned.csv")
+df = pd.read_csv(Path(__file__).resolve().parent.parent / "data" / "car_listings_cleaned.csv")
 X = df.drop("car_price", axis=1)
 y = np.log1p(df["car_price"])
 
